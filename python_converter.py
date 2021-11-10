@@ -1,14 +1,13 @@
 import sys
 
 inp = sys.stdin.readline() #Reads input x = matrix("name", a, b)
-s = inp.split(' ')
+s = inp.split()
 v1 = s[0]
 name = s[2].split('"')[1]
 row = s[3][:-1]
 col = s[4][:-1] #need to fix accidental addition of ')' to instr.asm here, maybe .split('\s | ( | ) | , | =')?
 
 d = {v1:1}
-boo = False #what's this for?
 
 orig_stdout = sys.stdout
 f = open('instr.asm', 'w')
