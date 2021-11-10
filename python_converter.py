@@ -31,8 +31,8 @@ for line in sys.stdin:
         s = line.split(' ')
         d[s[0]] = i
         #print(s[2].equals(s[4]))
-        print(s[2])
-        print(s[4])
+        #print(s[2])
+        #print(s[4])
         print("def ${} [1:{}] [1:{}]\n".format(i, row, col))
         print("\t \t{} ${} ${}\n".format(s[3], d.get(s[2]), d.get(s[3]))) #Should throw an error if var doesn't exist in dictionary
         print("end ${}\n".format(i))
