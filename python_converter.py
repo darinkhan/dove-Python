@@ -18,10 +18,18 @@ class Matrix():
         a = Matrix(self.name, self.row, self.col)
         return a
         
-    def __repr(self):
+    def __repr__(self):
         return "def ${} [1:{}] [1:{}]\n\t\tdataset {}\nend ${}\n".format(self.id, self.row, self.col, self.name, self.id)
-        
 
+        
+first = Matrix("testOne", 4, 3)
+second = Matrix("testTwo", 4, 3)
+third = first.add(second)
+print(first)
+print(second)
+print(third)
+
+"""
 inp = sys.stdin.readline() #Reads input x = matrix("name", a, b)
 s = inp.split()
 v1 = s[0]
@@ -63,3 +71,4 @@ for line in sys.stdin:
             
 sys.stdout = orig_stdout
 f.close()
+"""
