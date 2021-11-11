@@ -1,5 +1,27 @@
 import sys
 
+iden = 0
+
+class Matrix():
+    def __init__(self, name, row, col):
+        global iden
+        self.id = iden
+        self.name = name
+        self.row = row
+        self.col = col
+        iden += 1
+        
+    def get_id(self):
+        return self.id
+        
+    def add(self, other):
+        a = Matrix(self.name, self.row, self.col)
+        return a
+        
+    def __repr(self):
+        return "def ${} [1:{}] [1:{}]\n\t\tdataset {}\nend ${}\n".format(self.id, self.row, self.col, self.name, self.id)
+        
+
 inp = sys.stdin.readline() #Reads input x = matrix("name", a, b)
 s = inp.split()
 v1 = s[0]
