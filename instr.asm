@@ -1,11 +1,9 @@
 def $1 [1:2] [1:4)]
 
-		dataset name
+		dataset abc
 
 end $1
 
-x
-x
 def $2 [1:2] [1:4)]
 
 	 	+ $1 $None

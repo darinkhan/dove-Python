@@ -2,29 +2,50 @@ import sys
 
 iden = 0
 
-class Matrix():
-    def __init__(self, name, row, col):
+class Matrix():    
+    def __init__(self, row, col, name = None, firstID = None, secondID = None, modifier = None,):
         global iden
         self.id = iden
         self.name = name
         self.row = row
         self.col = col
+        self.modifier = modifier
+        self.firstID = firstID
+        self.secondID = secondID
         iden += 1
         
     def get_id(self):
         return self.id
         
     def add(self, other):
-        a = Matrix(self.name, self.row, self.col)
-        return a
+        temp = Matrix(self.row, self.col, None, self.id, other.id, modifier = '+')
+        return temp
+    
+    def subtract(self, other):
+        temp = Matrix(self.row, self.col, None, self.id, other.id, modifier = '-')
+        return temp
+
+    def divide(self, other):
+        temp = Matrix(self.row, self.col, None, self.id, other.id, modifier = "/")
+        return temp
+    
+    def multiply(self, other):
+        temp = Matrix(self.row, self.col, None, self.id, other.id, modifier = '*')
+        return temp    
+    
         
     def __repr__(self):
-        return "def ${} [1:{}] [1:{}]\n\t\tdataset {}\nend ${}\n".format(self.id, self.row, self.col, self.name, self.id)
+        if self.name == None:
+            return "def ${} [1:{}] [1:{}]\n\t{} ${} ${}\nend ${}\n".format(self.id, self.row, self.col, self.modifier, self.firstID, self.firstID, self.id)
+        else:
+            return "def ${} [1:{}] [1:{}]\n\tdataset {}\nend ${}\n".format(self.id, self.row, self.col, self.name, self.id)
+
+
 
         
-first = Matrix("testOne", 4, 3)
-second = Matrix("testTwo", 4, 3)
-third = first.add(second)
+first = Matrix(4, 3, "testOne")
+second = Matrix(4, 3, "testTwo")
+third = first.divide(second)
 print(first)
 print(second)
 print(third)
