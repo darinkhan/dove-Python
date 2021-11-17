@@ -1,6 +1,6 @@
 import sys
 
-iden = 0
+iden = 1
 
 class Matrix():    
     def __init__(self, row, col, name = None, firstID = None, secondID = None, modifier = None,):
@@ -49,6 +49,8 @@ third = first.divide(second)
 print(first)
 print(second)
 print(third)
+print(first.add(second))
+print(second.multiply(third))
 
 """
 inp = sys.stdin.readline() #Reads input x = matrix("name", a, b)
