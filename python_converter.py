@@ -3,54 +3,86 @@ import sys
 iden = 1
 
 class Matrix():    
-    def __init__(self, row, col, name = None, firstID = None, secondID = None, modifier = None,):
+    def __init__(self, row, col, name = None, modifier = None):
         global iden
         self.id = iden
         self.name = name
         self.row = row
         self.col = col
         self.modifier = modifier
-        self.firstID = firstID
-        self.secondID = secondID
         iden += 1
+        if self.name == None:
+            print("def ${} [1:{}] [1:{}]\n\t{} ".format(self.id, self.row, self.col, self.modifier), end = '')
+        else:
+            print("def ${} [1:{}] [1:{}]\n\tdataset {}\nend ${}\n".format(self.id, self.row, self.col, self.name, self.id))
         
-    def get_id(self):
-        return self.id
-        
-    def add(self, other):
-        temp = Matrix(self.row, self.col, None, self.id, other.id, modifier = '+')
+    def __add__(self, other):
+        temp = Matrix(self.row, self.col, None, modifier = '+')
+        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
         return temp
     
-    def subtract(self, other):
-        temp = Matrix(self.row, self.col, None, self.id, other.id, modifier = '-')
+    def __sub__(self, other):
+        temp = Matrix(self.row, self.col, None, modifier = '-')
+        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
         return temp
 
-    def divide(self, other):
-        temp = Matrix(self.row, self.col, None, self.id, other.id, modifier = "/")
+    def __truediv__(self, other):
+        temp = Matrix(self.row, self.col, None, modifier = "/")
+        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
         return temp
     
-    def multiply(self, other):
-        temp = Matrix(self.row, self.col, None, self.id, other.id, modifier = '*')
+    def __mul__(self, other):
+        temp = Matrix(self.row, self.col, None, modifier = '*')
+        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
         return temp    
     
+    def __mod__(self, other):
+        temp = Matrix(self.row, self.col, None, modifier = '%')
+        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
+        return temp  
+    
+    def __pow__(self, other):
+        temp = Matrix(self.row, self.col, None, modifier = '**')
+        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
+        return temp  
+    
+    def __rshift__(self, other):
+        temp = Matrix(self.row, self.col, None, modifier = '>>')
+        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
+        return temp  
+    
+    def __lshift__(self, other):
+        temp = Matrix(self.row, self.col, None, modifier = '<<')
+        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
+        return temp  
+    
+    def __and__(self, other):
+        temp = Matrix(self.row, self.col, None, modifier = '&')
+        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
+        return temp  
+    
+    def __or__(self, other):
+        temp = Matrix(self.row, self.col, None, modifier = '|')
+        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
+        return temp  
+    
+    def __xor__(self, other):
+        temp = Matrix(self.row, self.col, None, modifier = '^')
+        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
+        return temp  
         
     def __repr__(self):
-        if self.name == None:
-            return "def ${} [1:{}] [1:{}]\n\t{} ${} ${}\nend ${}\n".format(self.id, self.row, self.col, self.modifier, self.firstID, self.firstID, self.id)
-        else:
-            return "def ${} [1:{}] [1:{}]\n\tdataset {}\nend ${}\n".format(self.id, self.row, self.col, self.name, self.id)
-
+        return "print ${}\n".format(self.id)
 
 
         
 first = Matrix(4, 3, "testOne")
 second = Matrix(4, 3, "testTwo")
-third = first.divide(second)
+third = first + second
 print(first)
 print(second)
 print(third)
-print(first.add(second))
-print(second.multiply(third))
+print(second * third)
 
 """
 inp = sys.stdin.readline() #Reads input x = matrix("name", a, b)
