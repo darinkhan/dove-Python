@@ -1,6 +1,8 @@
 import sys
 
 iden = 1
+orig_stdout = sys.stdout
+sys.stdout = open('instr.asm', 'w')
 
 class Matrix():    
     def __init__(self, row, col, name = None, modifier = None):
@@ -12,67 +14,67 @@ class Matrix():
         self.modifier = modifier
         iden += 1
         if self.name == None:
-            print("def ${} [1:{}] [1:{}]\n\t{} ".format(self.id, self.row, self.col, self.modifier), end = '')
+            print("def ${} [1:{}] [1:{}]\n\t{}".format(self.id, self.row, self.col, self.modifier), end = '')
         else:
-            print("def ${} [1:{}] [1:{}]\n\tdataset {}\nend ${}\n".format(self.id, self.row, self.col, self.name, self.id))
+            print("def ${} [1:{}] [1:{}]\n\tdataset {}\nend ${}".format(self.id, self.row, self.col, self.name, self.id))
         
     def __add__(self, other):
         temp = Matrix(self.row, self.col, None, modifier = '+')
-        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
+        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
         return temp
     
     def __sub__(self, other):
         temp = Matrix(self.row, self.col, None, modifier = '-')
-        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
+        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
         return temp
 
     def __truediv__(self, other):
         temp = Matrix(self.row, self.col, None, modifier = "/")
-        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
+        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
         return temp
     
     def __mul__(self, other):
         temp = Matrix(self.row, self.col, None, modifier = '*')
-        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
+        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
         return temp    
     
     def __mod__(self, other):
         temp = Matrix(self.row, self.col, None, modifier = '%')
-        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
+        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
         return temp  
     
     def __pow__(self, other):
         temp = Matrix(self.row, self.col, None, modifier = '**')
-        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
+        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
         return temp  
     
     def __rshift__(self, other):
         temp = Matrix(self.row, self.col, None, modifier = '>>')
-        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
+        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
         return temp  
     
     def __lshift__(self, other):
         temp = Matrix(self.row, self.col, None, modifier = '<<')
-        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
+        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
         return temp  
     
     def __and__(self, other):
         temp = Matrix(self.row, self.col, None, modifier = '&')
-        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
+        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
         return temp  
     
     def __or__(self, other):
         temp = Matrix(self.row, self.col, None, modifier = '|')
-        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
+        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
         return temp  
     
     def __xor__(self, other):
         temp = Matrix(self.row, self.col, None, modifier = '^')
-        print("${} ${}\nend ${}\n".format(self.id, other.id, temp.id))
+        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
         return temp  
         
     def __repr__(self):
-        return "print ${}\n".format(self.id)
+        return "print ${}".format(self.id)
 
 
         
@@ -83,6 +85,8 @@ print(first)
 print(second)
 print(third)
 print(second * third)
+
+sys.stdout = orig_stdout
 
 """
 inp = sys.stdin.readline() #Reads input x = matrix("name", a, b)
@@ -95,8 +99,7 @@ col = s[4][:-1] #need to fix accidental addition of ')' to instr.asm here, maybe
 d = {v1:1}
 
 orig_stdout = sys.stdout
-f = open('instr.asm', 'w')
-sys.stdout = f
+sys.stdout = open('instr.asm', 'w')
 
 i = 1
 print("def ${} [1:{}] [1:{}]\n".format(i, row, col))
