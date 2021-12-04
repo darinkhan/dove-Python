@@ -14,77 +14,62 @@ class Matrix():
         self.modifier = modifier
         iden += 1
         if self.name == None:
-            print("def ${} [1:{}] [1:{}]\n\t{}".format(self.id, self.row, self.col, self.modifier), end = '')
+            print("def ${} [1:{}] [1:{}]\n\t{} ".format(self.id, self.row, self.col, self.modifier), end = '')
         else:
             print("def ${} [1:{}] [1:{}]\n\tdataset {}\nend ${}".format(self.id, self.row, self.col, self.name, self.id))
         
-    def __add__(self, other):
-        temp = Matrix(self.row, self.col, None, modifier = '+')
+    def createMatrix(self, other, modifier):
+        temp = Matrix(self.row, self.col, None, modifier)
         print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
         return temp
+    
+    def __add__(self, other):
+        return Matrix.createMatrix(self, other, '+')
     
     def __sub__(self, other):
-        temp = Matrix(self.row, self.col, None, modifier = '-')
-        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
-        return temp
+        return Matrix.createMatrix(self, other, '-')
 
     def __truediv__(self, other):
-        temp = Matrix(self.row, self.col, None, modifier = "/")
-        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
-        return temp
+        return Matrix.createMatrix(self, other, '/')
     
     def __mul__(self, other):
-        temp = Matrix(self.row, self.col, None, modifier = '*')
-        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
-        return temp    
+        return Matrix.createMatrix(self, other, '*')
     
     def __mod__(self, other):
-        temp = Matrix(self.row, self.col, None, modifier = '%')
-        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
-        return temp  
+        return Matrix.createMatrix(self, other, '%')
     
     def __pow__(self, other):
-        temp = Matrix(self.row, self.col, None, modifier = '**')
-        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
-        return temp  
+        return Matrix.createMatrix(self, other, '**')        
     
     def __rshift__(self, other):
-        temp = Matrix(self.row, self.col, None, modifier = '>>')
-        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
-        return temp  
+        return Matrix.createMatrix(self, other, '>>')
     
     def __lshift__(self, other):
-        temp = Matrix(self.row, self.col, None, modifier = '<<')
-        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
-        return temp  
+        return Matrix.createMatrix(self, other, '<<')        
     
     def __and__(self, other):
-        temp = Matrix(self.row, self.col, None, modifier = '&')
-        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
-        return temp  
+        return Matrix.createMatrix(self, other, '&')
     
     def __or__(self, other):
-        temp = Matrix(self.row, self.col, None, modifier = '|')
-        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
-        return temp  
+        return Matrix.createMatrix(self, other, '!')        
     
     def __xor__(self, other):
-        temp = Matrix(self.row, self.col, None, modifier = '^')
-        print("${} ${}\nend ${}".format(self.id, other.id, temp.id))
-        return temp  
+        return Matrix.createMatrix(self, other, '^')
         
     def __repr__(self):
         return "print ${}".format(self.id)
 
 
-        
 first = Matrix(4, 3, "testOne")
 second = Matrix(4, 3, "testTwo")
 third = first + second
+fourth = first ** second
+fifth = first << second
 print(first)
 print(second)
 print(third)
 print(second * third)
+
 
 sys.stdout = orig_stdout
 
